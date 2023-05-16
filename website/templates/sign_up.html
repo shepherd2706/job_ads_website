@@ -1,0 +1,58 @@
+<!-- ten plik bedzie taki sam jak base.html i mozna nadpisywac bloki ktore w nim sa -->
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+<!-- metoda POST wysyla wszystkie informacje z forma na serwer, serwer odpowiada na requesta i cos robi -->
+<form method="POST">
+    <h3 align="center">Sign Up</h3>
+    <div class="form-group">
+        <label for="email">Email Address</label>
+        <!-- po atrybucie id laczymy label z inputem -->
+        <!-- po atrybucie name laczymy inputem z backendem pythona-->
+        <input
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="Enter email"
+            type="email"/>
+    </div>
+    <div class="form-group">
+        <label for="firstName">First name</label>
+        <input
+            class="form-control"
+            id="firstName"
+            name="firstName"
+            placeholder="Enter first name"
+            type="text"/>
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last name</label>
+        <input
+            class="form-control"
+            id="lastName"
+            name="lastName"
+            placeholder="Enter last name"
+            type="text"/>
+    </div>
+    <div class="form-group">
+        <label for="password1">Password</label>
+        <input
+            class="form-control"
+            id="password1"
+            name="password1"
+            placeholder="Enter password"
+            type="password"/>
+    </div>
+    <div class="form-group">
+        <label for="password2">Confirm password</label>
+        <input
+            class="form-control"
+            id="password2"
+            name="password2"
+            placeholder="Confirm password"
+            type="password"/>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

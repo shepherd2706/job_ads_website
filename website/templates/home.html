@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<!-- ten plik bedzie taki sam jak base.html i mozna nadpisywac bloki ktore w nim sa -->
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<h1 align="center">Jobs</h1>
+<ul class="list-group list-group-flush" id="ads">
+    <!-- user.ads jest z relacji w pliku models pomiedzy tabela User i Ad -->
+    {% for ad in user.ads %}
+    <li class="list-group-item">{{ ad.description }}</li>
+        <button type="button" class="close" onClick="">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    {% endfor %}
+</ul>
+<form method="POST">
+    <textarea name="ad" id="ad" class="form-control"></textarea>
+    <br/>
+    <div align="center">
+        <button type="submit" class="btn btn-primary">Add job</button>
+    </div>
+</form>
+{% endblock %}
