@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 {% block content %}
-<h1 align="center">Jobs</h1>
+<h1 align="center">JOBS LISTING</h1>
 <ul class="list-group" id="jobs">
     <!-- user.jobs jest z relacji w pliku models pomiedzy tabela User i Job-->
     {% for job in user.jobs %}
@@ -23,7 +23,6 @@
     <div align="center">
         <button class="btn btn-danger" onClick="delete_job({{ job.id }})" type="button">Delete</button>
     </div>
-    <br/>
     {% endfor %}
 </ul>
 <form method="POST">
