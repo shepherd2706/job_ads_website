@@ -16,4 +16,4 @@ py main.py
 
 ## Wyswietlanie
 
-`localhost:5000`
+`[localhost:5000](http://127.0.0.1:5000)`
