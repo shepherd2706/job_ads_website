@@ -2,7 +2,7 @@
 Zawiera URL do komponentow strony
 '''
 
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
 from .models import Ad
 from . import db
@@ -26,8 +26,14 @@ def home():
 
     return render_template('home.html', user=current_user) # funkcja zwraca template z pliku home.html
 
-'''
 @views.route('/delete-ad', methods=['POST'])
-def delete_ad():
-    ad = json.loads(request.data)
-'''
+def delete_ad():  
+    ad = json.loads(request.data) # funkcja dostaje plik json z index.js
+    ad_id = ad['adId']
+    ad = Ad.query.get(ad_id)
+    if ad:
+        if ad.user_id == current_user.id:
+            db.session.delete(ad)
+            db.session.commit()
+
+    return jsonify({})

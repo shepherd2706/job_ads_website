@@ -7,7 +7,7 @@
     <!-- user.ads jest z relacji w pliku models pomiedzy tabela User i Ad -->
     {% for ad in user.ads %}
     <li class="list-group-item">{{ ad.description }}</li>
-        <button type="button" class="close" onClick="">
+        <button type="button" class="close" onClick="delete_ad({{ ad.id }})">
             <span aria-hidden="true">&times;</span>
         </button>
     {% endfor %}
