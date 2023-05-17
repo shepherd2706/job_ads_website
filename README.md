@@ -1,7 +1,7 @@
 ## Instalacja
 
 ```bash
-git clone <repo-url>
+git clone [<repo-url>](https://github.com/shepherd2706/job_ads_website)
 ```
 
 ```bash
