@@ -1,7 +1,7 @@
-function delete_ad(adId) {
-  fetch("/delete-ad", {
+function delete_job(jobId) {
+  fetch("/delete-job", {
     method: "POST",
-    body: JSON.stringify({ adId: adId }),
+    body: JSON.stringify({ jobId: jobId }),
   }).then((_res) => {
     window.location.href = "/";
   });

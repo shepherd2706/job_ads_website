@@ -16,7 +16,7 @@ from .views import views
 from .auth import auth
 
 # modele bazy danych importujemy zanim utworzymy baze danych
-from .models import User, Ad
+from .models import User, Job
 from os import path
 from flask_login import LoginManager
 
