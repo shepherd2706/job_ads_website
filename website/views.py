@@ -4,16 +4,16 @@ Zawiera URL do komponentow strony
 
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
-from .models import Job
+from .models import Job, User
 from . import db
 import json
+from sqlalchemy.sql import select
 
 views = Blueprint(name='views', import_name=__name__)
 
 # to co w home odpali sie gdy wejde w URL tego konkretnego widoku
-@views.route('/', methods=['GET', 'POST'])
-@login_required
-def home():
+@views.route('/account', methods=['GET', 'POST'])
+def account():
     if request.method == 'POST':
         desc = request.form.get('description') # dane z forma o name=description
         sal = request.form.get('salary') # request.form jest slownikiem pythonowym dlatego uzywamy metody get()
@@ -28,7 +28,7 @@ def home():
             db.session.commit()
             flash('Added!', category='success')
 
-    return render_template('home.html', user=current_user) # funkcja zwraca template z pliku home.html
+    return render_template('account.html', user=current_user) # funkcja zwraca template z pliku home.html
 
 @views.route('/delete-job', methods=['POST'])
 def delete_job():
@@ -41,3 +41,9 @@ def delete_job():
             db.session.commit()
 
     return jsonify({})
+
+@views.route('/')
+def home():
+    jobs = Job.query.all()
+    users = User.query.all()
+    return render_template('home.html', user=current_user, jobs_data=jobs, users_data=users)
