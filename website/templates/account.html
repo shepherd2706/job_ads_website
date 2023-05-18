@@ -1,46 +1,48 @@
 <!-- ten plik bedzie taki sam jak base.html i mozna nadpisywac bloki ktore w nim sa -->
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
+
+{% block title %}
+Witaj {{ user.first_name }} {{ user.last_name }}
+{% endblock %}
+
 {% block content %}
-<h1 align="center">JOBS LISTING</h1>
+<h1 align="center">Twoje ogłoszenia</h1>
 <ul class="list-group" id="jobs">
     <!-- user.jobs jest z relacji w pliku models pomiedzy tabela User i Job-->
     {% for job in user.jobs %}
     <li class="list-group-item">
         <div>
-            <label for="salary">Salary:</label>
-            <span class="form-control">{{ job.salary }}</span>
+            <span class="form-control"><b>Wynagrodzenie: </b>{{ job.salary }}</span>
         </div>
         <div>
-            <label for="localisation">Localisation:</label>
-            <span class="form-control">{{ job.localisation }}</span>
+            <span class="form-control"><b>Lokalizacja: </b>{{ job.localisation }}</span>
         </div>
         <div>
-            <label for="description">Description:</label>
-            <span class="form-control">{{ job.description }}</span>
+            <span class="form-control"><b>Opis: </b>{{ job.description }}</span>
+        </div>
+        <br/>
+        <div align="center">
+            <button class="btn btn-danger" onClick="delete_job({{ job.id }})" type="button">Usuń</button>
         </div>
     </li>
-    <div align="center">
-        <button class="btn btn-danger" onClick="delete_job({{ job.id }})" type="button">Delete</button>
-    </div>
     {% endfor %}
 </ul>
 <form method="POST">
     <div>
-        <label for="salary">Salary:</label>
+        <label for="salary">Wynagrodzenie:</label>
         <input class="form-control" id="salary" name="salary" type="number">
     </div>
     <div>
-        <label for="localisation">Localisation:</label>
+        <label for="localisation">Lokalizacja:</label>
         <input class="form-control" id="localisation" name="localisation" type="text">
     </div>
     <div>
-        <label for="description">Description:</label>
+        <label for="description">Opis:</label>
         <textarea class="form-control" id="description" name="description"></textarea>
     </div>
     <br/>
     <div align="center">
-        <button class="btn btn-primary" type="submit">Add</button>
+        <button class="btn btn-primary" type="submit">Dodaj</button>
     </div>
 </form>
 {% endblock %}
