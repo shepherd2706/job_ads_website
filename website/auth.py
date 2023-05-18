@@ -17,13 +17,13 @@ def login():
         if user:
             # sprawdzamy, czy hash podanego hasla sie zgadza z haslem w bazie danych
             if check_password_hash(user.password, password):
-                flash('Logged in!', category='success')
+                flash('Zalogowano!', category='success')
                 login_user(user, remember=True)
-                return redirect(url_for('views.home'))
+                return redirect(url_for('views.account'))
             else:
-                flash('Incorrect passoword!', category='error')
+                flash('Niepoprawne hasło!', category='error')
         else:
-            flash('E-mail does not exist!', category='error')
+            flash('Podany adres e-mail nie istnieje!', category='error')
 
     return render_template('login.html', user=current_user) # mozna przekazywac zmienne do widokow
 
@@ -44,24 +44,24 @@ def sign_up():
 
         user = User.query.filter_by(email=email).first()
         if user: # jezeli uzytkownik istnieje to wyswietla wiadomosc
-            flash('E-mail already exists!', category='error')
+            flash('Podany e-mail znajduje się już w bazie danych!', category='error')
         elif len(email) < 4:
-            flash(message='e-mail too short', category='error')
+            flash(message='E-mail jest za krótki!', category='error')
         elif len(firstName) < 2:
-            flash(message='first name too short', category='error')
+            flash(message='Pole imię nie może być puste!', category='error')
         elif len(lastName) < 2:
-            flash(message='last name too short', category='error')
+            flash(message='Pole nazwisko nie może być puste!', category='error')
         elif len(password1) < 8:
-            flash(message='password too short', category='error')
+            flash(message='Podane hasło jest zbyt krótkie', category='error')
         elif password1 != password2:
-            flash(message="passwords don't match", category='error')
+            flash(message='Hasła nie zgadzają się!', category='error')
         else:
             new_user = User(email=email, password=generate_password_hash(password1, method='sha256'), first_name=firstName, last_name=lastName)
             db.session.add(new_user)
             db.session.commit() # update bazy danych
             login_user(new_user, remember=True) # logowanie uzytkownika po rejestracji
-            flash(message='Account created', category='success')
+            flash(message='Konto utworzone!', category='success')
 
             # przekierowujemy na url uzywajac funkcji pythonowej ktora renderuje template
-            return redirect(url_for('views.home'))
+            return redirect(url_for('views.account'))
     return render_template('sign_up.html', user=current_user)
