@@ -1,0 +1,30 @@
+<!-- strona glowna z wszystkimi ogloszeniami -->
+{% extends "base.html" %}
+{% block title %}Oferty pracy{% endblock %}
+{% block content %}
+<h1 align="center">Wszystkie oferty</h1>
+<ul class="list-group" id="jobs">
+    <!-- user.jobs jest z relacji w pliku models pomiedzy tabela User i Job-->
+    {% for job in jobs_data %}
+        <li class="list-group-item">
+            <div>
+                {% for user in users_data %}
+                    {% if job.user_id == user.id %}
+                        <span class="form-control"><b>Zleceniodawca: </b>{{ user.first_name }} {{ user.last_name }}</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div>
+                <span class="form-control"><b>Wynagrodzenie: </b>{{ job.salary }}</span>
+            </div>
+            <div>
+                <span class="form-control"><b>Lokalizacja: </b>{{ job.localisation }}</span>
+            </div>
+            <div>
+                <span class="form-control"><b>Opis: </b>{{ job.description }}</span>
+            </div>
+            <br/>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
