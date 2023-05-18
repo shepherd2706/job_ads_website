@@ -21,7 +21,7 @@ inne pliki html beda nadpisywac to co jest w tym pliku -->
     <!-- piszac kod pythona trzeba go umiescic w nawiasach klamrowych i znakach procenta -->
     <!-- block pozwala na nadpisywanie tresci na stronach dziedziczacych po base.html -->
     <!-- title - nazwa bloku, Home - tesc bloku -->
-    <title>{% block title %}Home{% endblock %}</title>
+    <title>{% block title %}Strona domowa{% endblock %}</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -35,12 +35,13 @@ inne pliki html beda nadpisywac to co jest w tym pliku -->
       </button>
       <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav">
+          <a class="nav-item nav-link" id="home" href="/">Strona domowa</a>
           {% if user.is_authenticated %}
-          <a class="nav-item nav-link" id="home" href="/">Home</a>
-          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+          <a class="nav-item nav-link" id="account" href="/account">Konto</a>
+          <a class="nav-item nav-link" id="logout" href="/logout">Wyloguj się</a>
           {% else %}
-          <a class="nav-item nav-link" id="login" href="/login">Login</a>
-          <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+          <a class="nav-item nav-link" id="login" href="/login">Zaloguj się</a>
+          <a class="nav-item nav-link" id="signUp" href="/sign-up">Zarejestruj się</a>
           {% endif %}
         </div>
       </div>
