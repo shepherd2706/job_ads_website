@@ -9,6 +9,7 @@ from sqlalchemy.sql import func
 
 class Job(db.Model):
     id = db.Column(db.Integer, primary_key=True) # id samo sie dodaje i nie trzeba go podawac
+    position = db.Column(db.String(100))
     salary = db.Column(db.Integer)
     description = db.Column(db.String(1000))
     date = db.Column(db.DateTime, default=func.now()) # ustawia czas na moment dodania ogloszenia
@@ -22,4 +23,5 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(30))
     first_name = db.Column(db.String(30))
     last_name = db.Column(db.String(30))
+    company = db.Column(db.String(100))
     jobs = db.relationship('Job') # tutaj juz nazwa klasy pythonowej

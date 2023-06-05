@@ -39,6 +39,7 @@ def sign_up():
         email = request.form.get('email')
         firstName = request.form.get('firstName')
         lastName = request.form.get('lastName')
+        company = request.form.get('company')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
@@ -51,12 +52,14 @@ def sign_up():
             flash(message='Pole imię nie może być puste!', category='error')
         elif len(lastName) < 2:
             flash(message='Pole nazwisko nie może być puste!', category='error')
+        elif len(company) < 2:
+            flash(message='Pole nazwa firmy nie może być puste!', category='error')
         elif len(password1) < 8:
             flash(message='Podane hasło jest zbyt krótkie', category='error')
         elif password1 != password2:
             flash(message='Hasła nie zgadzają się!', category='error')
         else:
-            new_user = User(email=email, password=generate_password_hash(password1, method='sha256'), first_name=firstName, last_name=lastName)
+            new_user = User(email=email, password=generate_password_hash(password1, method='sha256'), first_name=firstName, last_name=lastName, company=company)
             db.session.add(new_user)
             db.session.commit() # update bazy danych
             login_user(new_user, remember=True) # logowanie uzytkownika po rejestracji

@@ -2,29 +2,61 @@
 {% extends "base.html" %}
 {% block title %}Oferty pracy{% endblock %}
 {% block content %}
-<h1 align="center">Wszystkie oferty</h1>
-<ul class="list-group" id="jobs">
-    <!-- user.jobs jest z relacji w pliku models pomiedzy tabela User i Job-->
-    {% for job in jobs_data %}
-        <li class="list-group-item">
-            <div>
-                {% for user in users_data %}
-                    {% if job.user_id == user.id %}
-                        <span class="form-control"><b>Zleceniodawca: </b>{{ user.first_name }} {{ user.last_name }}</span>
-                    {% endif %}
+<div class="row">
+    <!-- filtry -->
+    <div class="col-md-3">
+        <br/>
+        <h4>Filtry</h4>
+        <form method="POST" action="/">
+        <div class="form-group">
+            <label for="filter_position">Stanowisko:</label>
+            <select class="form-control" name="filter_position" id="filter_position">
+                <option value="">Wszystkie</option>
+                {% for position in positions %}
+                <option value="{{ position[0] }}" {% if position[0] == filter_position %}selected="selected"{% endif %}>{{ position[0] }}</option>
                 {% endfor %}
-            </div>
-            <div>
-                <span class="form-control"><b>Wynagrodzenie: </b>{{ job.salary }}</span>
-            </div>
-            <div>
-                <span class="form-control"><b>Lokalizacja: </b>{{ job.localisation }}</span>
-            </div>
-            <div>
-                <span class="form-control"><b>Opis: </b>{{ job.description }}</span>
-            </div>
-            <br/>
-        </li>
-    {% endfor %}
-</ul>
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-dark" value="Filtruj">
+        </div>
+        </form>
+    </div>
+    <!-- oferty pracy -->
+    <div class="col-md-9">
+        <h1 align="center">Oferty</h1>
+        <ul class="list-group" id="jobs">
+            <!-- user.jobs jest z relacji w pliku models pomiedzy tabela User i Job-->
+            {% for job in jobs_data %}
+            <li class="list-group-item mb-4" style="background-color: #FCFCFC; border: 1px solid #ccc;">
+                <div style="display: flex; justify-content: space-between;">
+                    <div style="flex-grow: 8; margin-right: 10%;">
+                        <div>
+                            <span class="form-control" style="font-size: large"><b>Stanowisko: {{ job.position }}</b></span>
+                        </div>
+                        <div>
+                            {% for user in users_data %}
+                            {% if job.user_id == user.id %}
+                            <span class="form-control"><b>Firma: </b>{{ user.company }}</span>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div>
+                            <span class="form-control"><b>Opis: </b>{{ job.description }}</span>
+                        </div>
+                    </div>
+                    <div style="flex-grow: 5; text-align: right;">
+                        <div>
+                            <span class="form-control"><b>Wynagrodzenie: </b>{{ job.salary }} zł</span>
+                        </div>
+                        <div>
+                            <span class="form-control"><b>Lokalizacja: </b>{{ job.localisation }}</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endblock %}

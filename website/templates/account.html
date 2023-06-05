@@ -6,11 +6,38 @@ Witaj {{ user.first_name }} {{ user.last_name }}
 {% endblock %}
 
 {% block content %}
+<h2 align="center">Nowe ogłoszenie</h2>
+<form method="POST">
+    <div>
+        <label for="position" class="col-form-label">Stanowisko:</label>
+        <input class="form-control form-control-sm" id="position" name="position" type="text">
+    </div>
+    <div>
+        <label for="salary">Wynagrodzenie:</label>
+        <input class="form-control form-control-sm" id="salary" name="salary" type="number">
+    </div>
+    <div>
+        <label for="localisation">Lokalizacja:</label>
+        <input class="form-control form-control-sm" id="localisation" name="localisation" type="text">
+    </div>
+    <div>
+        <label for="description">Opis:</label>
+        <textarea class="form-control form-control-sm" id="description" name="description"></textarea>
+    </div>
+    <br/>
+    <div align="center">
+        <button class="btn btn-dark" type="submit">Dodaj nową ofertę</button>
+    </div>
+    </br></br>
+</form>
 <h1 align="center">Twoje ogłoszenia</h1>
 <ul class="list-group" id="jobs">
     <!-- user.jobs jest z relacji w pliku models pomiedzy tabela User i Job-->
     {% for job in user.jobs %}
     <li class="list-group-item">
+        <div>
+            <span class="form-control"><b>Stanowisko: </b>{{ job.position }}</span>
+        </div>
         <div>
             <span class="form-control"><b>Wynagrodzenie: </b>{{ job.salary }}</span>
         </div>
@@ -27,22 +54,4 @@ Witaj {{ user.first_name }} {{ user.last_name }}
     </li>
     {% endfor %}
 </ul>
-<form method="POST">
-    <div>
-        <label for="salary">Wynagrodzenie:</label>
-        <input class="form-control" id="salary" name="salary" type="number">
-    </div>
-    <div>
-        <label for="localisation">Lokalizacja:</label>
-        <input class="form-control" id="localisation" name="localisation" type="text">
-    </div>
-    <div>
-        <label for="description">Opis:</label>
-        <textarea class="form-control" id="description" name="description"></textarea>
-    </div>
-    <br/>
-    <div align="center">
-        <button class="btn btn-primary" type="submit">Dodaj</button>
-    </div>
-</form>
 {% endblock %}
