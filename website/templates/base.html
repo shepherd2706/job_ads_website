@@ -18,13 +18,25 @@ inne pliki html beda nadpisywac to co jest w tym pliku -->
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       crossorigin="anonymous"
     />
+    <style>
+      body {
+        margin-top: 50px;
+        background-color: #eee;
+      }
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+    </style>
     <!-- piszac kod pythona trzeba go umiescic w nawiasach klamrowych i znakach procenta -->
     <!-- block pozwala na nadpisywanie tresci na stronach dziedziczacych po base.html -->
     <!-- title - nazwa bloku, Home - tesc bloku -->
     <title>{% block title %}Strona domowa{% endblock %}</title>
   </head>
-  <body style="background-color: #eee">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <button
         class="navbar-toggler"
         type="button"

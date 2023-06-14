@@ -21,10 +21,12 @@ def account():
         loc = request.form.get('localisation')
         if len(pos) < 1:
             flash('Position cannot be empty!', category='error')
+        elif len(sal) < 1:
+            flash('Salary cannot be empty!', category='error')
         elif len(desc) < 1:
-            flash('Description cannot be empty!', category='error')
-        elif len(loc) < 1:
             flash('Localisation cannot be empty!', category='error')
+        elif len(loc) < 1:
+            flash('Description cannot be empty!', category='error')
         else:
             new_job = Job(user_id=current_user.id, salary=sal, description=desc, localisation=loc, position=pos)
             db.session.add(new_job)
